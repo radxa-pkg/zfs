@@ -1,0 +1,34 @@
+build/
+install/
+
+# Object files
+*.o
+*.lib
+*.so
+*.lo
+*.la
+*.pyc
+
+# Temp files
+*.swp
+*.swo
+*~
+
+# npmpub files
+src/mraajsJAVASCRIPT_wrap.cxx
+src/version.c
+package.json
+binding.gyp
+READMEFIRST
+npm-debug.log
+
+# Sonar
+.scannerwork/
+
+# Visual Studio Code
+.vscode*
+
+# CMake object files
+obj-aarch64-linux-gnu
+
+SOURCE

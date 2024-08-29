@@ -1,0 +1,11 @@
+/.debhelper
+/debhelper-build-stamp
+/files
+/lib*/
+/*pyzfs*/
+/*zfs*/
+/tmp/
+/*.debhelper.log
+/*.debhelper
+/*.substvars
+autoreconf.*
