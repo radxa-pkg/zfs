@@ -44,7 +44,6 @@ clean-doc:
 clean-deb:
 	# The packaging of the zfs team is not standard. There will be many *.install files generated during packaging, which need to be cleaned using GIT.
 	git clean -fx debian/*.install
-	dh_auto_clean
 	rm -rf debian/.debhelper debian/lib*/ debian/*pyzfs*/ debian/*zfs*/ debian/tmp/ debian/debhelper-build-stamp debian/files debian/*.debhelper.log debian/*.*.debhelper debian/*.substvars
 
 #
@@ -56,7 +55,7 @@ dch: debian/changelog
 
 .PHONY: deb
 deb: debian
-	debuild --no-lintian --no-sign -b -aarm64 -Pcross
+	debuild --no-lintian --lintian-hook "lintian --fail-on error,warning --suppress-tags bad-distribution-in-changes-file -- %p_%v_*.changes" --no-sign -b -aarm64 -Pcross
 
 .PHONY: release
 release:
