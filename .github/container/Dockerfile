@@ -1,9 +1,7 @@
 # Some dependencies conflict with the compilation tools of amd64 architecture. Use arm64 directly. container image
-FROM --platform=linux/arm64/v8 debian:bullseye
+FROM --platform=linux/arm64 debian:bullseye
 
-RUN dpkg --remove-architecture amd64 && \
-    dpkg --add-architecture arm64 && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get full-upgrade --no-install-recommends -y \
         build-essential crossbuild-essential-arm64 git \
         debhelper devscripts lintian abigail-tools debhelper-compat \
