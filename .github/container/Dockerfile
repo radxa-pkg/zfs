@@ -1,5 +1,5 @@
 # Some dependencies conflict with the compilation tools of amd64 architecture. Use arm64 directly. container image
-FROM docker.io/arm64v8/debian:bullseye
+FROM docker.io/arm64v8/debian:bookworm
 
 RUN apt-get update && \
     apt-get full-upgrade --no-install-recommends -y \
