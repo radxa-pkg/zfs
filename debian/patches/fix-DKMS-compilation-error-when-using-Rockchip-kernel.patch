@@ -1,0 +1,40 @@
+Description: Fix DKMS compilation error when using Rockchip kernel
+  Patch source: https://github.com/radxa/kernel/issues/54#issuecomment-1788453183 @linnaea
+Author: Chen Jiali <chenjiali@radxa.com>
+Bug: https://github.com/radxa/kernel/issues/54
+Last-Update: 2024-08-30
+
+Index: zfs-linux/config/kernel.m4
+Index: zfs-linux/module/os/linux/spl/spl-generic.c
+Index: zfs-linux/module/os/linux/zfs/zfs_ioctl_os.c
+===================================================================
+diff --git a/config/kernel.m4 b/config/kernel.m4
+index b51477b6..bfd57736 100644
+--- a/config/kernel.m4
++++ b/config/kernel.m4
+@@ -679,6 +679,7 @@ $2
+ MODULE_DESCRIPTION("conftest");
+ MODULE_AUTHOR(ZFS_META_AUTHOR);
+ MODULE_VERSION(ZFS_META_VERSION "-" ZFS_META_RELEASE);
++MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+ MODULE_LICENSE($3);
+ ])
+ 
+diff --git a/module/os/linux/spl/spl-generic.c b/module/os/linux/spl/spl-generic.c
+index 986db151..13b38acb 100644
+--- a/module/os/linux/spl/spl-generic.c
++++ b/module/os/linux/spl/spl-generic.c
+@@ -929,3 +929,4 @@ MODULE_DESCRIPTION("Solaris Porting Layer");
+ MODULE_AUTHOR(ZFS_META_AUTHOR);
+ MODULE_LICENSE("GPL");
+ MODULE_VERSION(ZFS_META_VERSION "-" ZFS_META_RELEASE);
++MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+diff --git a/module/os/linux/zfs/zfs_ioctl_os.c b/module/os/linux/zfs/zfs_ioctl_os.c
+index 663474ea..197d9364 100644
+--- a/module/os/linux/zfs/zfs_ioctl_os.c
++++ b/module/os/linux/zfs/zfs_ioctl_os.c
+@@ -377,3 +377,4 @@ MODULE_LICENSE("Dual MIT/GPL"); /* lua */
+ MODULE_LICENSE("Dual BSD/GPL"); /* zstd / misc */
+ MODULE_LICENSE(ZFS_META_LICENSE);
+ MODULE_VERSION(ZFS_META_VERSION "-" ZFS_META_RELEASE);
++MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
